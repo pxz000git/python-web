@@ -1,8 +1,8 @@
-创建项目
+##创建项目
     django-admin startproject test1
-创建应用
+##创建应用
     python manage.py startapp booktest
-向settings文件中注册应用
+##向settings文件中注册应用
         INSTALLED_APPS= [
         'django.contrib.admin',
         'django.contrib.auth',
@@ -12,11 +12,11 @@
         'django.contrib.staticfiles',
         'apps.booktest',
     ]
-生成迁移(根据定义的模型类生成和选择的数据库特定的sql语句)
+##生成迁移(根据定义的模型类生成和选择的数据库特定的sql语句)
     python manage.py makemigrations
-执行迁移(根据生成的迁移文件去数据库中执行特定的sql语句来创建表)
+##执行迁移(根据生成的迁移文件去数据库中执行特定的sql语句来创建表)
     python manage.py migrate
-进入shell:
+##进入shell:
     python manage.py shell
     正常的shell操作：
         b = BookInfo()
@@ -96,12 +96,12 @@
             在admin注册中使用gender代替hgender
             class HeroInfoAdmin(admin.ModelAdmin):
                 list_display = ['id', 'hname', 'gender', 'hcontent']
-视图：
+##视图：
     一般在应用app下建urls.py，作为路由，在test1.urls.py中分发到应用app下的url.py,然后指定到目标视图
-模板：
+##模板：
     在settings.py文件中TEMPLATES：'DIRS': [os.path.join(BASE_DIR, 'templates')],
     在项目目录下建目录templates,再在该目录下创建应用的文件，在不同应用文件下创建应用自身的html模板文件
     视图/index.html:如：booktest/index.html
-数据返回：
+##数据返回：
     bookList = BookInfo.objects.all()
     context = {'list': bookList}

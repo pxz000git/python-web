@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import *
 
+"""
+    注册模型类
+"""
+
 
 class HeroInfoInline(admin.TabularInline):
     model = HeroInfo
@@ -17,8 +21,8 @@ class BookInfoAdmin(admin.ModelAdmin):
     list_per_page = 10
     # 添加页，修改页属性
     fieldsets = [
-        ('base',{'fields':['btitle']}),
-        ('super',{'fields':['bpub_date']})
+        ('base', {'fields': ['btitle']}),
+        ('super', {'fields': ['bpub_date']})
     ]
 
     inlines = [HeroInfoInline]

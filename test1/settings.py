@@ -55,6 +55,7 @@ ROOT_URLCONF = 'test1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 添加模板
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -104,8 +105,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
+# 修改管理后台页面语言为中文
 LANGUAGE_CODE = 'zh-hans'
 
+# 修改管理后台时区为上海时区
 TIME_ZONE = 'Asia/Shanghai'  # 'UTC'
 
 USE_I18N = True

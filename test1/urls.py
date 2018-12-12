@@ -20,6 +20,7 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # 分发路由到个应用
     url('^', include('apps.booktest.urls')),
 ]
 

@@ -19,5 +19,6 @@ def index(request):
 def show(request,id):
     bookInfo = BookInfo.objects.get(pk=id)
     herolist = bookInfo.heroinfo_set.all()
+    # 传数据到前端
     context = {'list': herolist}
     return render(request, 'booktest/show.html', context)
