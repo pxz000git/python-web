@@ -16,7 +16,7 @@ def index(request):
     return render(request=request, template_name='booktest/index.html', context=context)
 
 
-def show(request,id):
+def show(request, id):
     bookInfo = BookInfo.objects.get(pk=id)
     herolist = bookInfo.heroinfo_set.all()
     # 传数据到前端

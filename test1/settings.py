@@ -23,8 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '39nch94hgdvaxp5+y9a7kj5b6qym!50e@h0^^jny2c(5i9yre!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# 调试时为True,发布部署时为False
 DEBUG = True
-
+# 允许的host,所有为:'*'
 ALLOWED_HOSTS = []
 
 
@@ -45,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

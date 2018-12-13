@@ -17,10 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 分发路由到个应用
-    url('^', include('apps.booktest.urls')),
+    url('^booktest/', include('apps.booktest.urls')),
+    url('^mybook/', include('apps.mybook.urls')),
 ]
-
