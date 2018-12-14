@@ -1,7 +1,11 @@
-from django.http import HttpResponse, HttpResponseRedirect
+import json
+
+from django.core import serializers
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from .models import *
 from django.conf import settings
+from django.core.paginator import *
 
 
 def index(request):
@@ -144,3 +148,22 @@ def upload_handle(request):
         return HttpResponse("ok")
     else:
         return HttpResponse("error")
+
+
+# 分页
+def show_page(request):
+    '''接受前端传来的值：page为要显示的页数，pageSize为每页显示的数量'''
+    page = request.GET.get('page')
+    pageSize = int(request.GET.get('pageSize'))
+    response = {}
+    book_list = HeroInfo.objects.all()
+    paginator = Paginator(book_list, pageSize)
+    response['total'] = paginator.count
+    try:
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
+    response['list'] = json.loads(serializers.serialize("json", books))
+    return JsonResponse(response)

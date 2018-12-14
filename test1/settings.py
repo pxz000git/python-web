@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.booktest',
     'apps.mybook',
-    'apps.user',
+    'apps.myajax',
 ]
 
 MIDDLEWARE = [
