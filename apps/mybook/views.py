@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import *
+from django.conf import settings
 
 
 def index(request):
@@ -109,3 +110,37 @@ def session_test3(req):
     # 删除session
     del req.session['myname']
     return redirect("/mybook/session_test1/")
+
+
+def show_image(request):
+    '''
+    图片处理
+    :param request: request
+    :return: None
+    '''
+    return render(request, 'mybook/image01.html')
+
+
+# 中间件
+def show_exception(request):
+    a = int('q')
+    return HttpResponse("hello Exception")
+
+
+# 上传图片
+def upload_pic(request):
+    return render(request, 'mybook/upload_pic.html')
+
+
+def upload_handle(request):
+    '''图片上传'''
+    if request.method == "POST":
+        pic = request.FILES.get('pic1', None)
+        file_name = '%s/%s' % (settings.MEDIA_ROOT, pic.name)
+        with open(file_name, 'wb') as f:
+            # 字节，DEFAULT_CHUNK_SIZE = 64 * 2 ** 10
+            for p in pic.chunks():
+                f.write(p)
+        return HttpResponse("ok")
+    else:
+        return HttpResponse("error")

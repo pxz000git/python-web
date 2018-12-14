@@ -29,6 +29,13 @@ urlpatterns = [
     url('^session_test2/$', views.session_test2, name='session_test2'),
     url('^session_test2_handle/$', views.session_test2_handle, name='session_test2_handle'),
     url('^session_test3/$', views.session_test3, name='session_test3'),
+    # 静态文件
+    url('^$', views.show_image),
+    # 中间件
+    url('^exception/$', views.show_exception),
+    # 上传图片
+    url('^upload/$', views.upload_pic),
+    url('^upload_handle/$', views.upload_handle),
 
 
 

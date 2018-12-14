@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -28,7 +29,6 @@ DEBUG = True
 # 允许的host,所有为:'*'
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,16 +40,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.booktest',
     'apps.mybook',
+    'apps.user',
 ]
 
 MIDDLEWARE = [
+    'apps.mybook.my_exception.middle_ware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'test1.urls'
@@ -73,7 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'test1.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -83,16 +85,15 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # },
     'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            # 注意了，这个数据库名django不能创建，你自己需要先创建数据库
-            'NAME': 'testdb',
-            'USER': 'root',
-            'PASSWORD': 'mysql',
-            'HOST': 'localhost',
-            'PORT': '3306',
-        }
+        'ENGINE': 'django.db.backends.mysql',
+        # 这个数据库名django不能创建，你自己需要先创建数据库
+        'NAME': 'testdb',
+        'USER': 'root',
+        'PASSWORD': 'mysql',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -112,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -128,10 +128,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+# 在settings 文件中定义静态内容
+STATIC_URL = '/abc/'  # static这是磁盘上的逻辑路径,可以换成abc,在htmL上要对应逻辑路径，即url的路径
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # static配置磁盘上的物理路径
+]
+
+# 上传文件
+UPLOAD_URL = 'static/mybook/upload/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, UPLOAD_URL)
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
