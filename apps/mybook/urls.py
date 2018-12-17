@@ -37,8 +37,11 @@ urlpatterns = [
     url('^upload/$', views.upload_pic),
     url('^upload_handle/$', views.upload_handle),
     # 分页
-    url('^page/$', views.show_page)
-
-
+    url('^page/$', views.show_page),
+    # celery
+    url('^celery/$', views.celery_test),
+    # 登录验证
+    url(r'^login/$', views.login),
+    url(r'^login_index/$', views.login_index),
 
 ]

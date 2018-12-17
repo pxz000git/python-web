@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.booktest',
     'apps.mybook',
-    'apps.myajax',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -142,3 +142,16 @@ UPLOAD_URL = 'static/mybook/upload/media'
 MEDIA_ROOT = os.path.join(BASE_DIR, UPLOAD_URL)
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+# celery settings
+import djcelery
+
+# 初始化所有的任务
+djcelery.setup_loader()
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_IMPORTS = ('mybook.task')
+
+# import djcelery
+# djcelery.setup_loader()
+# BROKER_URL= 'amqp://guest@localhost//'
+# CELERY_RESULT_BACKEND = 'amqp://guest@localhost//'

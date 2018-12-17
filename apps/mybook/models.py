@@ -75,7 +75,12 @@ class HeroInfo(models.Model):
     hgender = models.BooleanField(default=True)
     isDelete = models.BooleanField(default=False)
     hcontent = models.CharField(max_length=100)
-    hbook = models.ForeignKey('BookInfo', on_delete=False)
+    hbook = models.ForeignKey('BookInfo', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.hname
+
+
+class User(models.Model):
+    username = models.CharField(max_length=16)
+    password = models.CharField(max_length=32)
